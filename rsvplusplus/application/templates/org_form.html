@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_org_form') }}" method=post class=add-entry>
+      <dl>
+        <dt>Organization Name:
+        <dd><input type=text size=30 name=org_name>
+        <dt>Organization Address:
+        <dd><textarea name=org_address rows=1 cols=40></textarea>
+        <dt>Organization City:
+        <dd><textarea name=org_city rows=1 cols=40></textarea>
+        <dt>Organization State:
+        <dd><textarea name=org_state rows=1 cols=40></textarea>
+        <dt>Organization Zip:
+        <dd><textarea name=org_zip rows=1 cols=40></textarea>
+        <dt>Organization Email:
+        <dd><textarea name=org_email rows=1 cols=40></textarea>
+        <dt>Organization Phone:
+        <dd><textarea name=org_phone rows=1 cols=40></textarea>
+        <dt>Organization Type:
+        <dd><textarea name=org_type rows=1 cols=40></textarea>
+
+        <dd><input type=submit value=Share>
+      </dl>
+    </form>
+  {% endif %}
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
+
+org_name text,
+org_address text,
+org_city text,
+org_state text,
+org_zip text,
+org_email text,
+org_phone text,
+org_type text);

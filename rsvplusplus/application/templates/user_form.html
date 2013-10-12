@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+  {% if session.logged_in %}
+    <form action="{{ url_for('add_user_form') }}" method=post class=add-entry>
+      <dl>
+        <dt>First Name:
+        <dd><textarea name=first_name rows=1 cols=40></textarea>
+        <dt>Last Name:
+        <dd><input type=text size=30 name=last_name>
+        <dt>Email:
+        <dd><textarea name=email rows=1 cols=40></textarea>
+        <dt>Phone:
+        <dd><textarea name=phone rows=1 cols=40></textarea>
+        <dt>Address:
+        <dd><textarea name=address rows=1 cols=40></textarea>
+        <dt>City:
+        <dd><textarea name=city rows=1 cols=40></textarea>
+        <dt>State:
+        <dd><textarea name=state rows=1 cols=40></textarea>
+        <dt>Zip:
+        <dd><textarea name=zip rows=1 cols=40></textarea>
+
+        <dt>Password:
+        <dd><textarea name=password rows=1 cols=40></textarea>
+        <dd><input type=submit value=Send>
+        
+      </dl>
+    </form>
+
+
+  {% endif %}
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}
