@@ -1,0 +1,38 @@
+Document
+
+Log in
+--email address
+--password
+
+Signup
+USER INFO => Organization INFO => EVENT INFO => Registration INFO
+
+USER FORM
+-- first name
+-- last name
+-- email
+-- phone
+-- address
+-- organization /* drop down box from registered organizaitons */
+
+ORGANIZATION FORM
+-- org_name
+-- org_address
+-- org_email
+-- org_phone
+-- org_type
+
+EVENT FORM
+-- title
+-- day
+-- time
+-- location
+-- description
+-- donation anchor /*  */
+
+REGISTRATION FORM
+-- event /* pull from drop down box if direct to page, Use <uid> as base url to build on */
+-- RSVP /* Yes, no, null */
+-- donation 
+
+
