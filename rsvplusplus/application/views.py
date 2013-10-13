@@ -19,11 +19,13 @@ from application import app
 from decorators import login_required, admin_required
 from forms import ExampleForm
 from models import ExampleModel
-
+import paypalrestsdk
+from application import paypal_settings
 
 # Flask-Cache (configured to use App Engine Memcache API)
 cache = Cache(app)
 
+def
 
 def home():
     return redirect(url_for('list_examples'))
