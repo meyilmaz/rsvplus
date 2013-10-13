@@ -8,20 +8,7 @@
 
 {% block content %}
 
-    event_id = ndb.IntegerProperty
-    date_stamp = ndb.DateTimeProperty(auto_now_add=True)
-    title = ndb.StringProperty()
-    day = ndb.StringProperty()
-    time = ndb.StringProperty()
-    location = ndb.StringProperty()
-    description = ndb.StringProperty()
-    anchor_amount = ndb.StringProperty()
-    amount_min = ndb.StringProperty()
-    max_attendees = ndb.StringProperty()
-    registration_start = ndb.StringProperty()
-    registration_end = ndb.StringProperty()
-    owner_id = ndb.StringProperty()
-
+    
     <h1 id="">All Events</h1>
     <div>&nbsp;</div>
     <table class="table table-bordered table-striped">
@@ -59,18 +46,14 @@
                 <td>{{ example.registration_end }}</td>
                 <td>{{ example.added_by }}</td>
 
-                max_attendees = ndb.StringProperty()
-    registration_start = ndb.StringProperty()
-    registration_end = ndb.StringProperty()
-    owner_id = ndb.StringProperty()
 
 
                 <td class="nowrap">{{ example.timestamp.strftime('%b %d, %Y %I:%M %p') }}</td>
                 <td>
-                    <a href="{{ url_for('edit_example', example_id=example_id) }}" class="btn">Edit</a>
+                    <a href="{{ url_for('edit_event', event_id=event_id) }}" class="btn">Edit</a>
                 </td>
                 <td>
-                    <form method="post" action="{{ url_for('delete_example', example_id=example_id) }}">
+                    <form method="post" action="{{ url_for('delete_event', event_id=event_id) }}">
                         <button class="btn">Delete</button>
                     </form>
                 </td>
@@ -81,7 +64,7 @@
         </tbody>
     </table>
     <p>
-        <a class="btn btn-primary" data-toggle="modal" data-target="#new-example-modal">
+        <a class="btn btn-primary" data-toggle="modal" data-target="#new-example-modal"> 
             <i class="icon-plus-sign icon-white"></i>
             New example
         </a>
@@ -96,22 +79,22 @@
         var FormHelpers = {
             validate: function (form, evt) {
                 // Form validation for modal dialog
-                var example_name = form.find('#example_name').val();
-                var example_description = form.find('#example_description').val();
-                if (!(example_name)) {
+                var event_name = form.find('#event_name').val();
+                var event_description = form.find('#event_description').val();
+                if (!(event_name)) {
                     evt.preventDefault();
-                    Utils.renderFieldErrorTooltip('#example_name', 'Name is required', 'right');
+                    Utils.renderFieldErrorTooltip('#event_name', 'Name is required', 'right');
                 }
-                if (!(example_description)) {
+                if (!(event_description)) {
                     evt.preventDefault();
-                    Utils.renderFieldErrorTooltip('#example_description', 'Description is required', 'right');
+                    Utils.renderFieldErrorTooltip('#event_description', 'Description is required', 'right');
                 }
             },
             init: function () {
                 var self = this;
-                var example_form = $('#new-example-form');
-                example_form.on('submit', function (evt) {
-                    self.validate(example_form, evt)
+                var event_form = $('#new-example-form');
+                event_form.on('submit', function (evt) {
+                    self.validate(event_form, evt)
                 });
             }
         };
