@@ -26,7 +26,7 @@ class User(ndb.Model):
     phone = ndb.StringProperty()
     address = ndb.StringProperty()
     state = ndb.StringProperty()
-    zip = ndb.StringProperty()
+    zip_code = ndb.StringProperty()
     password = ndb.StringProperty()
     org_id = ndb.StringProperty()
 
