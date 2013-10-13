@@ -79,11 +79,3 @@ RegisterForm = model_form(Register, wtf.Form, field_args={
 
 })
 
-'''Register Model'''
-    register_id = ndb.StringProperty()
-    date_stamp = ndb.DateTimeProperty(auto_now_add=True)
-    rsvp = ndb.StringProperty()
-    donation = ndb.StringProperty()
-    user_id = ndb.StringProperty()
-    event_id = ndb.StringProperty()
-
