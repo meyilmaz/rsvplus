@@ -57,6 +57,32 @@ def list_examples():
 
 
 @login_required
+def user_examples():
+    """List all examples"""
+    user = UserModel.query()
+    form = UserForm()
+    if form.validate_on_submit():
+        user = UserModel(
+            last_name=form.last_name.data,
+            first_name=form.first_name.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            address=form.address.data,
+            
+            added_by=users.get_current_user()
+        )
+        try:
+            example.put()
+            example_id = example.key.id()
+            flash(u'Example %s successfully saved.' % example_id, 'success')
+            return redirect(url_for('list_examples'))
+        except CapabilityDisabledError:
+            flash(u'App Engine Datastore is currently in read-only mode.', 'info')
+            return redirect(url_for('list_examples'))
+    return render_template('list_examples.html', user=user, form=form)
+
+
+@login_required
 def edit_example(example_id):
     example = ExampleModel.get_by_id(example_id)
     form = ExampleForm(obj=example)

@@ -60,9 +60,17 @@ class Event(ndb.Model):
 
 class Register(ndb.Model):
     '''Register Model'''
-    register_id = ndb.StringProperty()
+    register_id = ndb.IntegerProperty()
     date_stamp = ndb.DateTimeProperty(auto_now_add=True)
     rsvp = ndb.StringProperty()
-    donation = ndb.StringProperty()
+    donation = ndb.IntegerProperty()
     user_id = ndb.StringProperty()
-    event_id = ndb.StringProperty()
+    event_id = ndb.IntegerProperty()
+
+class Paypal(ndb.Model):
+	'''Paypal Model'''
+	payer_id = ndb.StringProperty()
+	json_response = ndb.StringProperty()
+	dollar_amount = ndb.IntegerProperty()
+	confirmation = ndb.StringProperty()
+	event_id = ndb.IntegerProperty()
