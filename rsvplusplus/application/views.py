@@ -17,7 +17,7 @@ from flask_cache import Cache
 
 from application import app
 from decorators import login_required, admin_required
-from forms import ExampleForm
+from forms import ExampleForm, UserForm, OrganizationForm, EventForm, RegisterForm 
 from models import ExampleModel, User, Organization, Event, Register
 import paypalrestsdk
 from application import paypal_settings
