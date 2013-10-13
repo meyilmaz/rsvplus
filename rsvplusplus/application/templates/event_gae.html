@@ -8,28 +8,63 @@
 
 {% block content %}
 
-    <h1 id="">All Examples</h1>
+    event_id = ndb.IntegerProperty
+    date_stamp = ndb.DateTimeProperty(auto_now_add=True)
+    title = ndb.StringProperty()
+    day = ndb.StringProperty()
+    time = ndb.StringProperty()
+    location = ndb.StringProperty()
+    description = ndb.StringProperty()
+    anchor_amount = ndb.StringProperty()
+    amount_min = ndb.StringProperty()
+    max_attendees = ndb.StringProperty()
+    registration_start = ndb.StringProperty()
+    registration_end = ndb.StringProperty()
+    owner_id = ndb.StringProperty()
+
+    <h1 id="">All Events</h1>
     <div>&nbsp;</div>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th>Event_ID</th>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Location</th>
                 <th>Description</th>
-                <th>Added by</th>
-                <th>Added on</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
+                <th>Anchor Amount</th>
+                <th>Minimum Amount</th>
+                <th>Registration Start</th>
+                <th>Registration End</th>
+
+
             </tr>
         </thead>
         <tbody>
-            {% for example in examples %}
-            {% set example_id = example.key.id() %}
+            {% for example in event %}
+            {% set event_id = event.key.id() %}
             <tr>
                 <td>{{ example_id }}</td>
-                <td>{{ example.example_name }}</td>
-                <td>{{ example.example_description }}</td>
+                <td>{{ example.title }}</td>
+                <td>{{ example.day }}</td>
+                <td>{{ example.time }}</td>
+                <td>{{ example.location }}</td>
+                <td>{{ example.description }}</td>
+                <td>{{ example.anchor_amount }}</td>
+                <td>{{ example.amount_min }}</td>
+                <td>{{ example.max_attendees }}</td>
+                <td>{{ example.amount_min }}</td>
+                <td>{{ example.registration_start }}</td>
+                <td>{{ example.registration_end }}</td>
                 <td>{{ example.added_by }}</td>
+
+                max_attendees = ndb.StringProperty()
+    registration_start = ndb.StringProperty()
+    registration_end = ndb.StringProperty()
+    owner_id = ndb.StringProperty()
+
+
                 <td class="nowrap">{{ example.timestamp.strftime('%b %d, %Y %I:%M %p') }}</td>
                 <td>
                     <a href="{{ url_for('edit_example', example_id=example_id) }}" class="btn">Edit</a>

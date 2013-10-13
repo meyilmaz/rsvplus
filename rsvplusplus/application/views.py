@@ -72,10 +72,10 @@ def edit_example(example_id):
 @login_required
 def user_examples():
     """List users"""
-    user = UserModel.query()
+    user = User.query()
     form = UserForm()
     if form.validate_on_submit():
-        user = UserModel(
+        user = User(
             last_name=form.last_name.data,
             first_name=form.first_name.data,
             email=form.email.data,
@@ -87,17 +87,17 @@ def user_examples():
         )
         try:
             example.put()
-            example_id = example.key.id()
-            flash(u'Example %s successfully saved.' % example_id, 'success')
-            return redirect(url_for('list_examples'))
+            user_id = user.key.id()
+            flash(u'Example %s successfully saved.' % user_id, 'success')
+            return redirect(url_for('user_examples'))
         except CapabilityDisabledError:
             flash(u'App Engine Datastore is currently in read-only mode.', 'info')
-            return redirect(url_for('list_examples'))
-    return render_template('list_examples.html', user=user, form=form)
+            return redirect(url_for('user_examples'))
+    return render_template('user_gae.html', user=user, form=form)
 
 @login_required
 def edit_user(user_id):
-    user = UserModel.get_by_id(user_id)
+    user = User.get_by_id(user_id)
     form = UserForm(obj=example)
     if request.method == "POST":
         if form.validate_on_submit():
@@ -109,18 +109,19 @@ def edit_user(user_id):
             user.state=form.data.get('state')
             user.zip_code=form.data.get('zip_code')
             user.put()
-            flash(u'Example %s successfully saved.' % example_id, 'success')
+            flash(u'Example %s successfully saved.' % user_id, 'success')
             return redirect(url_for('user_examples'))
     return render_template('edit_example.html', user=user, form=form)
 
 
 @login_required
 def event_examples():
-    """List all examples"""
-    event = EventModel.query()
-    form = ExampleForm()
+    """List all events"""
+    event = Event.query()
+    form = EventForm()
     if form.validate_on_submit():
-        event = ExampleModel(
+        event = Event(
+            #event_id=
             title=form.title.data,
             day=form.day.data,
             location=form.location.data,
@@ -133,18 +134,18 @@ def event_examples():
             added_by=users.get_current_user()
         )
         try:
-            example.put()
-            example_id = example.key.id()
-            flash(u'Example %s successfully saved.' % example_id, 'success')
+            event.put()
+            event_id = event.key.id()
+            flash(u'Event %s successfully saved.' % event_id, 'success')
             return redirect(url_for('event_examples'))
         except CapabilityDisabledError:
             flash(u'App Engine Datastore is currently in read-only mode.', 'info')
-            return redirect(url_for('list_examples'))
-    return render_template('list_examples.html', event=event, form=form)
+            return redirect(url_for('event_examples'))
+    return render_template('event_gae.html', event=event, form=form)
 
 @login_required
 def edit_event(event_id):
-    event = EventModel.get_by_id(event_id)
+    event = Event.get_by_id(event_id)
     form = EventForm(obj=example)
     if request.method == "POST":
         if form.validate_on_submit():
@@ -159,19 +160,18 @@ def edit_event(event_id):
             event.registration_end=form.data.get('registration_end')
             
             event.put()
-            flash(u'Example %s successfully saved.' % example_id, 'success')
-            return redirect(url_for('list_examples'))
-    return render_template('edit_example.html', event=event, form=form)
+            flash(u'Event %s successfully saved.' % event_id, 'success')
+            return redirect(url_for('event_examples'))
+    return render_template('edit_event.html', event=event, form=form)
 
 
 @login_required
 def register_examples():
     """List register examples"""
-    register = RegisterModel.query()
+    register = Register.query()
     form = RegisterForm()
     if form.validate_on_submit():
-        register = RegisterModel(
-            register_id=form.register.data,
+        register = Register(
             rsvp=form.rsvp.data,
             donation=form.donation.data,
             user_id=users.get_current_user()
@@ -180,15 +180,15 @@ def register_examples():
             register.put()
             register_id = register.key.id()
             flash(u'Example %s successfully saved.' % register_id, 'success')
-            return redirect(url_for('list_examples'))
+            return redirect(url_for('register_examples'))
         except CapabilityDisabledError:
             flash(u'App Engine Datastore is currently in read-only mode.', 'info')
-            return redirect(url_for('list_examples'))
-    return render_template('list_examples.html', register=register, form=form)
+            return redirect(url_for('register_examples'))
+    return render_template('register_gae.html', register=register, form=form)
 
 @login_required
 def edit_register(register_id):
-    register = RegisterModel.get_by_id(register_id)
+    register = Register.get_by_id(register_id)
     form = RegisterForm(obj=example)
     if request.method == "POST":
         if form.validate_on_submit():

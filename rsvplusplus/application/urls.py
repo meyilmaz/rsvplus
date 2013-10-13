@@ -37,6 +37,24 @@ app.add_url_rule('/examples/<int:example_id>/edit', 'edit_example', view_func=vi
 app.add_url_rule('/examples/<int:example_id>/delete', view_func=views.delete_example, methods=['POST'])
 
 
+# User list page
+app.add_url_rule('/user', 'user_examples', view_func=views.user_examples, methods=['GET', 'POST'])
+
+# Edit a user
+app.add_url_rule('/user/<int:user_id>/edit', 'edit_user', view_func=views.edit_user, methods=['GET', 'POST'])
+
+# Event list page
+app.add_url_rule('/event', 'event_examples', view_func=views.event_examples, methods=['GET', 'POST'])
+
+# Edit an event
+app.add_url_rule('/event/<int:event_id>/edit', 'edit_event', view_func=views.edit_event, methods=['GET', 'POST'])
+
+# Register list page
+app.add_url_rule('/register', 'register_examples', view_func=views.register_examples, methods=['GET', 'POST'])
+
+# Edit an Registration
+app.add_url_rule('/register/<int:register_id>/edit', 'edit_registration', view_func=views.edit_register, methods=['GET', 'POST'])
+
 ## Error handlers
 # Handle 404 errors
 @app.errorhandler(404)
