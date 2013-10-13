@@ -6,8 +6,8 @@ first_name text,
 email text,
 phone text,
 address text,
-org_state text,
-org_zip text,
+state text,
+zip text,
 password text,
 org_id integer);
 
