@@ -55,33 +55,6 @@ def list_examples():
             return redirect(url_for('list_examples'))
     return render_template('list_examples.html', examples=examples, form=form)
 
-
-@login_required
-def user_examples():
-    """List all examples"""
-    user = UserModel.query()
-    form = UserForm()
-    if form.validate_on_submit():
-        user = UserModel(
-            last_name=form.last_name.data,
-            first_name=form.first_name.data,
-            email=form.email.data,
-            phone=form.phone.data,
-            address=form.address.data,
-            
-            added_by=users.get_current_user()
-        )
-        try:
-            example.put()
-            example_id = example.key.id()
-            flash(u'Example %s successfully saved.' % example_id, 'success')
-            return redirect(url_for('list_examples'))
-        except CapabilityDisabledError:
-            flash(u'App Engine Datastore is currently in read-only mode.', 'info')
-            return redirect(url_for('list_examples'))
-    return render_template('list_examples.html', user=user, form=form)
-
-
 @login_required
 def edit_example(example_id):
     example = ExampleModel.get_by_id(example_id)
@@ -94,6 +67,138 @@ def edit_example(example_id):
             flash(u'Example %s successfully saved.' % example_id, 'success')
             return redirect(url_for('list_examples'))
     return render_template('edit_example.html', example=example, form=form)
+
+
+@login_required
+def user_examples():
+    """List users"""
+    user = UserModel.query()
+    form = UserForm()
+    if form.validate_on_submit():
+        user = UserModel(
+            last_name=form.last_name.data,
+            first_name=form.first_name.data,
+            email=form.email.data,
+            phone=form.phone.data,
+            address=form.address.data,
+            state=form.state.data,
+            zip_code=form.zip_code.data,
+            added_by=users.get_current_user()
+        )
+        try:
+            example.put()
+            example_id = example.key.id()
+            flash(u'Example %s successfully saved.' % example_id, 'success')
+            return redirect(url_for('list_examples'))
+        except CapabilityDisabledError:
+            flash(u'App Engine Datastore is currently in read-only mode.', 'info')
+            return redirect(url_for('list_examples'))
+    return render_template('list_examples.html', user=user, form=form)
+
+@login_required
+def edit_user(user_id):
+    user = UserModel.get_by_id(user_id)
+    form = UserForm(obj=example)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            user.last_name=form.data.get('last_name')
+            user.first_name=form.data.get('first_name')
+            user.email=form.data.get('email')
+            user.phone=form.data.get('phone')
+            user.address=form.data.get('address')
+            user.state=form.data.get('state')
+            user.zip_code=form.data.get('zip_code')
+            user.put()
+            flash(u'Example %s successfully saved.' % example_id, 'success')
+            return redirect(url_for('user_examples'))
+    return render_template('edit_example.html', user=user, form=form)
+
+
+@login_required
+def event_examples():
+    """List all examples"""
+    event = EventModel.query()
+    form = ExampleForm()
+    if form.validate_on_submit():
+        event = ExampleModel(
+            title=form.title.data,
+            day=form.day.data,
+            location=form.location.data,
+            description=form.descrtiption.data,
+            anchor_amount=form.anchor_amount.data,
+            amount_min=form.amount_min.data,
+            max_attendees=form.max_attendees.data,
+            registration_start=form.registration_start.data,
+            registration_end=form.registration_end.data,
+            added_by=users.get_current_user()
+        )
+        try:
+            example.put()
+            example_id = example.key.id()
+            flash(u'Example %s successfully saved.' % example_id, 'success')
+            return redirect(url_for('event_examples'))
+        except CapabilityDisabledError:
+            flash(u'App Engine Datastore is currently in read-only mode.', 'info')
+            return redirect(url_for('list_examples'))
+    return render_template('list_examples.html', event=event, form=form)
+
+@login_required
+def edit_event(event_id):
+    event = EventModel.get_by_id(event_id)
+    form = EventForm(obj=example)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            event.title=form.data.get('title')
+            event.day=form.data.get('day')
+            event.location=form.data.get('location')
+            event.description=form.data.get('descrtiption')
+            event.anchor_amount=form.data.get('anchor_amount')
+            event.amount_min=form.data.get('amount_min')
+            event.max_attendees=form.data.get('max_attendees')
+            event.registration_start=form.data.get('registration_start')
+            event.registration_end=form.data.get('registration_end')
+            
+            event.put()
+            flash(u'Example %s successfully saved.' % example_id, 'success')
+            return redirect(url_for('list_examples'))
+    return render_template('edit_example.html', event=event, form=form)
+
+
+@login_required
+def register_examples():
+    """List register examples"""
+    register = RegisterModel.query()
+    form = RegisterForm()
+    if form.validate_on_submit():
+        register = RegisterModel(
+            register_id=form.register.data,
+            rsvp=form.rsvp.data,
+            donation=form.donation.data,
+            user_id=users.get_current_user()
+        )
+        try:
+            register.put()
+            register_id = register.key.id()
+            flash(u'Example %s successfully saved.' % register_id, 'success')
+            return redirect(url_for('list_examples'))
+        except CapabilityDisabledError:
+            flash(u'App Engine Datastore is currently in read-only mode.', 'info')
+            return redirect(url_for('list_examples'))
+    return render_template('list_examples.html', register=register, form=form)
+
+@login_required
+def edit_register(register_id):
+    register = RegisterModel.get_by_id(register_id)
+    form = RegisterForm(obj=example)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            register.rsvp = form.data.get('rsvp')
+            register.donation = form.data.get('donation')
+            
+            register.put()
+            flash(u'Example %s successfully saved.' % example_id, 'success')
+            return redirect(url_for('register_examples'))
+    return render_template('edit_register.html', register=register, form=form)
 
 
 @login_required
