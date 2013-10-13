@@ -31,7 +31,7 @@ time integer,
 location text,
 description text,
 anchor_amount real,
-amount_min real
+amount_min real,
 max_attendees integer,
 registration_start integer,
 registration_end integer,

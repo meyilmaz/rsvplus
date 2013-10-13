@@ -144,13 +144,12 @@ def add_event_form():
     if not session.get('logged_in'):
         abort(401)
     db = get_db()
-    db.execute('''insert into event (title, day, time, location, description, anchor_amount, amount_min, max_attendees, registration_start, registration_end) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',\
+    db.execute('''insert into event (title, day, time, location, description, anchor_amount, amount_min, max_attendees, registration_start, registration_end) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',\
                 [request.form['title'], request.form['day'],\
                 request.form['time'], request.form['location'],\
                 request.form['description'], request.form['anchor_amount'],\
                 request.form['amount_min'], request.form['max_attendees'],\
-                request.form['registration_start'], request.form['registration_end'],\
-                request.form['owner_id']])
+                request.form['registration_start'], request.form['registration_end']])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
@@ -159,9 +158,9 @@ def add_event_form():
 @app.route('/newregistration')
 def show_registration_form():
     db = get_db()
-    cur = db.execute('select title, text from entries order by id desc')
-    entries = cur.fetchall()
-    return render_template('show_entries.html', entries=entries)
+    cur = db.execute('select event_id, title, day from event order by day desc')
+    event = cur.fetchall()
+    return render_template('registration_from.html', event=event)
 
 @app.route('/newregistration_add', methods=['POST'])
 #@app.route('/newaccount_add/<user_id>', methods=['POST'])
@@ -171,7 +170,7 @@ def add_registration_form():
         abort(401)
     db = get_db()
     db.execute('insert into registration (rsvp, donation, user_id, event_id) values (?, ?, ?, ?)',\
-                 [request.form['rsvp'], request.form['donation'], request.form['user_id'], request.form['event_id']])
+                 [request.form['rsvp'], request.form['donation'], request.form['event_id']])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_entries'))
