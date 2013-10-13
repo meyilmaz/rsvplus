@@ -4,13 +4,13 @@
     <form action="{{ url_for('add_registration_form') }}" method=post class=add-entry>
       <dl>
         <dt>Event:
-        <dd><input type=text size=30 name=title>
+        <dd><input type=text size=30 name=event></input>
         <dt>RSVP:
-        <dd><textarea name=rsvp rows=1 cols=10></textarea>
+        <dd><input type=text name=rsvp ></input>
         <dt>Donation:
-        <dd><textarea name=text rows=1 cols=10></textarea>
+        <dd><input type=text name=donation></input>
 
-        <dd><input type=submit value=Send>
+        <dd><input type=submit value=Send></input>
       </dl>
     </form>
   {% endif %}

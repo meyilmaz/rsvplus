@@ -122,7 +122,7 @@ def add_org_form():
                 [request.form['org_name'], request.form['org_address'],\
                 request.form['org_city'], request.form['org_state'],\
                  request.form['org_zip'], request.form['org_email'],\
-                 request.form['org_phone'], reqest.form['org_type']])
+                 request.form['org_phone'], request.form['org_type']])
     db.commit()
     flash('New entry was successfully posted')
     return redirect(url_for('show_event_form'))

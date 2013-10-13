@@ -4,23 +4,23 @@
     <form action="{{ url_for('add_org_form') }}" method=post class=add-entry>
       <dl>
         <dt>Organization Name:
-        <dd><input type=text size=30 name=org_name>
+        <dd><input type=text size=30 name=org_name></input>
         <dt>Organization Address:
-        <dd><textarea name=org_address rows=1 cols=40></textarea>
+        <dd><input type=text size=30 name=org_address ></input>
         <dt>Organization City:
-        <dd><textarea name=org_city rows=1 cols=40></textarea>
+        <dd><input type=text size=30 name=org_city ></input>
         <dt>Organization State:
-        <dd><textarea name=org_state rows=1 cols=40></textarea>
+        <dd><input type=text size=30 name=org_state ></input>
         <dt>Organization Zip:
-        <dd><textarea name=org_zip rows=1 cols=40></textarea>
+        <dd><input type=text size=30 name=org_zip ></input>
         <dt>Organization Email:
-        <dd><textarea name=org_email rows=1 cols=40></textarea>
+        <dd><input type=text size=30 name=org_email ></input>
         <dt>Organization Phone:
-        <dd><textarea name=org_phone rows=1 cols=40></textarea>
+        <dd><input type=text size=30 name=org_phone ></input>
         <dt>Organization Type:
-        <dd><textarea name=org_type rows=1 cols=40></textarea>
+        <dd><input type=text size=30 name=org_type ></input>
 
-        <dd><input type=submit value=Share>
+        <dd><input type=submit value=Send>
       </dl>
     </form>
   {% endif %}

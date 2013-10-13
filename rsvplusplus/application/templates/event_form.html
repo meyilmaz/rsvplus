@@ -4,23 +4,23 @@
     <form action="{{ url_for('add_event_form') }}" method=post class=add-entry>
       <dl>
         <dt>Title:
-        <dd><input type=title size=30 name=title>
+        <dd><input type=text size=30 name=title></input>
         <dt>Day:
-        <dd><textarea name=day rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=day ></input>
         <dt>Time:
-        <dd><textarea name=time rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=time ></input>
         <dt>Location:
-        <dd><textarea name=location rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=location ></input>
         <dt>Description:
-        <dd><textarea name=description rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=description ></input>
         <dt>Anchor Amount:
-        <dd><textarea name=anchor_amount rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=anchor_amount ></input>
         <dt>Max Attendees:
-        <dd><textarea name=max_attendees rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=max_attendees ></input>
         <dt>Registration Start:
-        <dd><textarea name= rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=registration_start ></input>
         <dt>Registration End:
-        <dd><textarea name=registration_end rows=1 cols=30></textarea>
+        <dd><input type=text size=30 name=registration_end ></input>
 
         <dd><input type=submit value=Send>
       </dl>
